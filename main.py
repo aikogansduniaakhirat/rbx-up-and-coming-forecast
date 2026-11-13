@@ -1,7 +1,4 @@
 # roblox-up-and-coming-forecast-01 entry: a recency-weighted rank model.
-# Reads /input/history.ndjson (the chart's reads) and /input/task.json, writes
-# /output/forecast.json: for each of the top 10 places, a probability for each of a
-# set of candidate games, plus a top-10 order. Deterministic: no clock, no randomness.
 import json
 import math
 import os
@@ -9,15 +6,15 @@ import os
 IN = os.environ.get("MAKEFUN_INPUT_DIR", "/input")
 OUT = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
 
-N_CAND = 8
-SIGMA = 1.8
-MASS = 0.94
-HALFLIFE = 1.0
-W_MEAN = 0.20
-W_LAST = 0.80
-AGE_PEN = 2.6
+N_CAND = 30
+SIGMA = 3.4
+MASS = 0.99
+HALFLIFE = 2.5
+W_MEAN = 0.45
+W_LAST = 0.55
+AGE_PEN = 1.6
 YOUNG = 0.2
-SLOPE = 0.4
+SLOPE = 0.3
 
 
 def ranks_of(reading):
